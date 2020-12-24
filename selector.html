@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+  
+	<style type="text/css">
+		#odula {
+  width: 2.3rem;
+  height: 2.3rem;
+  background-color: #fff;
+  cursor: pointer;
+  border: 4px solid #56b8f5;
+  border-radius: 50%;
+  position: absolute;
+  display: none; 
+  transition: color 0.2s, background-color 0.2s ease-in-out;
+}
+#odula:hover {
+  color: #fff;
+  background-color: #56b8f5;
+}
+.selectable{
+  background-color: #d3d3d3;
+  padding: 10px;
+  }
+  h4{
+    background-color: #00ffff;
+    display: inline;
+    padding: 5px;
+  }
+
+	</style>
+</head>
+<body>
+
+  <div style="background-color: #d3d3d3;text-align: center;padding: 2px;">
+    <h1>TULUNADU CULTURE</h1>
+    <h3>TEXT_TO_SPEECH</h3>
+  </div><br>
+
+  <div class="selectable">
+    <h4>( Select the Sentence that Need to be Read out )</h4>
+     <p>Vedic scriptures make a division of Aryans and Non-Aryans, who are shown in poor light. Scholars now say that they were of one and the same race with common culture and languages and were dependent on each other. The division of Bharatvarsha as ‘Uttarapath’ and ‘Dakshinapath’ (also known as Aryavarta and Dravidavarta) was a regional one with ‘Vindhya Ranges’ standing in the middle as a divider. Dravidapath or Dravidavarta is so called, as it is a peninsula, encircled by three seas. This is vindicated by the great Philosopher Shankaracharya of 8th Century from South, while replying Mandana Mishra’s question, “Who is he?” Myth of Aryan and Dravidian Races, which is a concept nurtured by colonialists, continues still. Tulu traditions and orature (=oral+ literature), as a part of Dravidian culture relate to social, political and religious psyche of Tulunadu, located between Western 0(Sayhadri) Ghats on the East and Arabian Sea on the West. Tulunadu is an epitome of peaceful co-existence.</p>
+     <p>All regions thrived in Tulunadu. Hinduism (with Vedic Gods and later on Mother Goddess, Shiva and Vishnu Taking center stage), Buddhism (later on absorbed into Shaiva cult) and Jainism are naturally evolved into socio-religious order. Islam and Christianity took root in India under political considerations and coercion. There is a synchronization of Daivas (deified living legends or heroes of Past, including Muslims) and Vedic Gods and Goddesses. They are worshipped as personalized, Community and Group of Villages (Maagane) Gods and Godheads in shrines and temples. This is unique to Tulunadu. The peaceful living is manifest in precedence and sequences of annual festivals/celebrations in shrines and temples.</p>
+     <p>The meeting of deities takes place(in the form of possessed impersonators) of one temple, where the annual festivals (āyana , teru, kola or nema) have just concluded, is the mark of starting (‘kodi erunu’, meaning raising of temple flag) and permitting of annual festivals in an adjacent village. This meeting takes at the periphery of latter temple. The Divine Spirits are classified in three categories, firstly ‘Ullaya or Chakravarti’ (i.e Lord of Lords, considered as manifestation of Devi, Shiva and Vishnu); secondly, Rajan (considered as Kings, who lived before deification after death) and thirdly, 'Kamberlu' (Danda nayakas or Chieftains). Firstly, these Daivas manifest themselves, through a medium, in the palace of their kingdom or house of their birth when alive and are worshipped in these places, called ‘moolada mane’ (place of origin), and they are believed in other places also as their devotees are spread.</p>
+     <p>Here is a case of direct contact, though through medium, with the deities. This speaks a volume how the custom of ‘Daivaradhane’ (=Spirit Worship) took root in Tulunadu (as also in adjoining Kerala with migration of certain ‘Daivas’ (also called ‘Bhootas’) to Kerala and vice versa. (Note: In Kerala, this Spirit worshipping is called ‘Theyyam’. Refer article by Dr. U.P. Upadhyaya in ‘Taranga’, a Kannada Weekly, March 4, 2010 Issue). Significant ‘Rajan Daivas’ are: (1) Jumadhi (Sanskritised as Dhumavati), believed to be reincarnation of Aadi Shakti (Mother Goddess), (2) Jarandaya, supposed to be the reincarnation of Shiva or Dharmaraja and (3) Babbarya or Bobbarya [supposed to be the reincarnation of Shastara and born to a Mogaveera woman as Babbana at Mulki (See ‘Babbana Babbarye’ in Mogaveera January 2009 Issue, written by Narayana A. Bangera). (The other version says, he is born to a Bunt woman and a Muslim trader) Panjurli Daiva is assistant to Rajan Daivas, as cited above, as 'Kshetrapala' (Guardian of the area), in maintaining justice and peace in the places where he is believed and worshipped.</p>
+  </div>
+
+  <img id="odula" src="images/volume.png">
+
+</body>
+
+	<script>
+// const flag=0;
+var text = "";
+var button=document.querySelector("#odula");
+var x=document.querySelector(".selectable");
+for (var i = 0; i < x.children.length; i++) {
+    var jokulu = x.children[i];
+    jokulu.addEventListener('mouseup', mouseselection);  
+}
+button.addEventListener('click',speaker);
+document.addEventListener('mousedown', mousedown);
+// button.style.display = "none";
+// });
+
+
+function mouseselection(event) {
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    } else if (document.selection && document.selection.type != "Control") {
+        text = document.selection.createRange().text;
+    }
+    if(text.length>1){
+      const x = event.pageX;
+      const y = event.pageY;
+
+      button.style.display = "block";
+      button.style.left = `${x}px`;
+      button.style.top = `${y}px`;
+    }
+ }
+
+
+// function speaker(){
+//   // flag=1;
+//   // button.style.display = "none";
+//   // // window.getSelection().empty();
+//   alert("ssjbjh");
+//   }
+
+function mousedown(event){
+  if(event.target.id!=="odula" && getComputedStyle(button).display==="block"){
+    button.style.display="none";
+    window.getSelection().empty();
+  }
+}
+
+function speaker(event){
+  button.style.display = "none";
+  window.getSelection().empty();
+  text=text.replace(/[^0-9a-zA-Z.' ']/gi,'');
+  speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+  }
+
+</script>
+
+</html>
